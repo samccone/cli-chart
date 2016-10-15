@@ -31,6 +31,7 @@ var Chart = module.exports = function(config) {
     this.ymin = config.ymin || defaults.ymin;
     this.ymax = config.ymax || this.height;
     this.max_size = 0;
+    this.max_bound = config.maxBound;
 };
 
 Chart.prototype.bucketize = function(data, min, max) {
@@ -131,7 +132,7 @@ Chart.prototype.labelAxes = function() {
         charm.right(this.width/2 - String(this.xmin).length);
         charm.write(this.xlabel);
         charm.right(this.width/2 - this.xlabel.length);
-        var xmaxstr = this.direction === 'x' ? String(this.max_size) : String(this.xmax);
+        var xmaxstr = this.direction === 'x' ? String(this.max_bound || this.max_size) : String(this.xmax);
         charm.write(xmaxstr);
         charm.pop();
 
@@ -141,9 +142,9 @@ Chart.prototype.labelAxes = function() {
 Chart.prototype.drawBars = function() {
     // set scale based on max_size
     if (this.direction === 'x') {
-        this.scale = this.width/this.max_size;
+        this.scale = this.width/(this.max_bound || this.max_size);
     } else {
-        this.scale = this.height/this.max_size;
+        this.scale = this.height/(this.max_bound || this.max_size);
     }
 
     var charm = this.charm;
