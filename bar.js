@@ -7,16 +7,17 @@ var Bar = module.exports = function(chart, opts) {
     this.size = opts.size;
     this.color = opts.color || defaults.color;
     this.label = opts.label;
+    this.barLabel = opts.barLabel;
 };
 
 Bar.prototype.draw = function(scale) {
     var charm = this.chart.charm;
     var dir = this.chart.direction;
     if (dir === 'x' && this.label) {
-	charm.push();
-	charm.left(this.label.length+2);
-	charm.write(this.label);
-	charm.pop();
+      charm.push();
+      charm.left(this.label.length+2);
+      charm.write(this.label);
+      charm.pop();
     }
     charm.background(this.color);
     for (var i = 0; i < Math.round(this.size*scale); i++) {
@@ -28,5 +29,9 @@ Bar.prototype.draw = function(scale) {
             charm.up(1);
         }
     }
+
     charm.display('reset');
+    if (this.barLabel) {
+      charm.write(' ' + this.barLabel);
+    }
 };

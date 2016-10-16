@@ -52,6 +52,8 @@ config attributes:
      * default: 0
  * **ymax**: number - the maxmimum of the y-axis
      * default: height
+ * **max_bound**: number - value for 100% width
+
  
 
 ## methods
@@ -61,6 +63,7 @@ Manually add a bar at the next position, which is 'chart.step' spaces away on th
 
   * size - Size of the bar in nominal units
   * color - Ansi color string - 'white','red','blue', etc...
+  * barLabel - if defined, string label appended after bar plotted.
 
 
 ### chart.bucketize(data)
